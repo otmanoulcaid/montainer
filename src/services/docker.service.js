@@ -5,7 +5,7 @@ export class DockerService {
 
     constructor(containerRepository) {
         this.dockerd = new Docker({ socketPath: process.platform === 'win32' ? '\\\\.\\pipe\\docker_engine' : '/var/run/docker.sock' });
-        this.repository = new ContainerRepository();
+        this.repository = ContainerRepository.getRepo();
         this.launchContainers();
     }
 

@@ -1,7 +1,10 @@
 import { MongoClient, ObjectId } from "mongodb";
+import bcrypt from "bcryptjs";
 import fs from "fs/promises";
 
 export class UserRepository {
+
+    static #repo = null
 
     constructor() {
         this.client = new MongoClient("mongodb://admin:secret@localhost:27017/?authSource=admin");
@@ -10,6 +13,12 @@ export class UserRepository {
 
         this.db = null;
         this.collection = null;
+    }
+
+    static getRepo() {
+        if (!UserRepository.#repo)
+            UserRepository.#repo = new UserRepository();
+        return UserRepository.#repo
     }
 
     async init() {
@@ -23,7 +32,12 @@ export class UserRepository {
         await this.init();
         const raw = await fs.readFile(tmpFilePath, "utf-8");
         const users = JSON.parse(raw);
-
+        for (const user of users) {
+            if (user.password) {
+                const salt = await bcrypt.genSalt(10);
+                user.password = await bcrypt.hash(user.password, salt);
+            }
+        }
         await this.collection.deleteMany({});
         const result = await this.collection.insertMany(users);
         // await fs.unlink(tmpFilePath);
@@ -36,6 +50,10 @@ export class UserRepository {
 
     async getUser(id) {
         return await this.collection.findOne({ _id: new ObjectId(id) });
+    }
+
+    async findUserByMatricule(matricule) {
+        return await this.collection.findOne({ matricule: Number(matricule) });
     }
 
     async getUsers() {

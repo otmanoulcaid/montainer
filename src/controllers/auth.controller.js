@@ -1,28 +1,29 @@
-import { AuthService } from "../services/auth.service.js"
+import { AuthService } from "../services/auth.service.js";
 
 export class AuthController {
 
     constructor() {
-        this.service = new AuthService()
+        // On injecte userService dans AuthService
+        this.service = new AuthService();
     }
 
     async login(req, res) {
         try {
-            const { username, password } = req.body
-            const token = await this.service.login(username, password)
-            res.json({ token })
+            const { matricule, password } = req.body;
+            const result = await this.service.login(matricule, password, res);
+
+            res.json(result);  // { message, user }
         } catch (e) {
-            res.status(401).json({ error: e.message })
+            res.status(401).json({ error: e.message });
         }
     }
 
     async logout(req, res) {
         try {
-            const { username, password } = req.body
-            const token = await this.service.login(username, password)
-            res.json({ token })
+            const result = this.service.logout(res);
+            res.json(result); // { message: "Déconnexion réussie" }
         } catch (e) {
-            res.status(401).json({ error: e.message })
+            res.status(500).json({ error: e.message });
         }
     }
 }

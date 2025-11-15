@@ -3,12 +3,21 @@ import { MongoClient } from "mongodb";
 import { ObjectId } from "mongodb";
 
 export class ContainerRepository {
+
+    static #repo;
+
     constructor() {
         this.client = new MongoClient("mongodb://admin:secret@localhost:27017/?authSource=admin");
         this.dbName = "docker_manager";
         this.collectionName = "containers";
         this.db = null;
         this.collection = null;
+    }
+
+    static getRepo() {
+        if (!ContainerRepository.#repo)
+            ContainerRepository.#repo = new ContainerRepository();
+        return ContainerRepository.#repo;
     }
 
     async init() {
@@ -25,6 +34,7 @@ export class ContainerRepository {
         await this.init();
         const raw = await fs.readFile(tmpJsonPath, "utf-8");
         const containers = JSON.parse(raw);
+        await this.collection.deleteMany({});
         const result = await this.collection.insertMany(containers);
         // await fs.unlink(tmpJsonPath);
 

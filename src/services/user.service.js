@@ -1,9 +1,16 @@
 import { UserRepository } from "../repositories/user.repository.js";
 
 export class UserService {
+    static #userService = null;
     constructor() {
-        this.userRepository = new UserRepository();
+        this.userRepository = UserRepository.getRepo();
         this.userRepository.loadUsers('src/data/user.data.json');
+    }
+
+    static getService() {
+        if (!UserService.#userService)
+            UserService.#userService = new UserService();
+        return UserService.#userService;
     }
 
     async getUser(obj) {
@@ -11,6 +18,10 @@ export class UserService {
             throw new Error("Missing user ID");
 
         return await this.userRepository.getUser(obj.id);
+    }
+
+    async getUserByMatricule(matricule) {
+        return await this.userRepository.findUserByMatricule(matricule)
     }
 
     async getUsers() {

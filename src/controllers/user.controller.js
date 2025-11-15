@@ -3,7 +3,7 @@ import { UserService } from "../services/user.service.js"
 export class UserController {
 
     constructor() {
-        this.service = new UserService()
+        this.service = UserService.getService()
     }
 
     async getUsers(req, res) {
