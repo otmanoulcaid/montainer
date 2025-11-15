@@ -20,20 +20,17 @@ router.delete('/:id', (req, res) => {
     controller.deleteContainer(req, res)
 })
 
-router.post('/:id/start', (req, res) => {
+router.put('/:id/start', (req, res) => {
     controller.startContainer(req, res)
 })
 
-router.post('/:id/stop', (req, res) => {
+router.put('/:id/stop', (req, res) => {
     controller.stopContainer(req, res)
 })
 
-router.post('/:id/restart', (req, res) => {
+router.put('/:id/restart', (req, res) => {
     controller.restartContainer(req, res)
 })
 
-router.get('/stats/live', (req, res) => {
-    controller.getStats(req, res)
-})
 
 export default router

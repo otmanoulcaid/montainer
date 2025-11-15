@@ -5,10 +5,10 @@ const router = Router()
 const controller = new UserController()
 
 router.get('/', (req, res) => {
-    controller.getUsers()
+    controller.getUsers(req, res)
 })
 router.get('/:id', (req, res) => {
-    controller.getUser()
+    controller.getUser(req, res)
 })
 
 export default router

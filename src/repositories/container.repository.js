@@ -3,9 +3,8 @@ import { MongoClient } from "mongodb";
 import { ObjectId } from "mongodb";
 
 export class ContainerRepository {
-
     constructor() {
-        // this.client = new MongoClient("mongodb://localhost:27017");
+        this.client = new MongoClient("mongodb://admin:secret@localhost:27017/?authSource=admin");
         this.dbName = "docker_manager";
         this.collectionName = "containers";
         this.db = null;
@@ -16,16 +15,18 @@ export class ContainerRepository {
         await this.client.connect();
         this.db = this.client.db(this.dbName);
         this.collection = this.db.collection(this.collectionName);
+        console.log("MongoDB connected (container collection ready)");
     }
 
     /**
      * Load containers from a TEMP JSON file and delete the file afterwards
      */
     async loadContainers(tmpJsonPath) {
+        await this.init();
         const raw = await fs.readFile(tmpJsonPath, "utf-8");
         const containers = JSON.parse(raw);
         const result = await this.collection.insertMany(containers);
-        await fs.unlink(tmpJsonPath);
+        // await fs.unlink(tmpJsonPath);
 
         return {
             inserted: result.insertedCount,
@@ -37,30 +38,9 @@ export class ContainerRepository {
         return await this.collection.findOne({ _id: new ObjectId(id) });
     }
 
-    // async getContainers() {
-    //     return await this.collection.find().toArray();
-    // }
-
     async getContainers() {
-        return [
-            {
-                name: "web_server",
-                image: "nginx",
-                port: 80
-            },
-            {
-                name: "db_server",
-                image: "mysql",
-                port: 3306
-            },
-            {
-                name: "cache_server",
-                image: "redis",
-                port: 6379
-            }
-        ];
+        return await this.collection.find().toArray();
     }
-
 
     async deleteContainer(id) {
         const result = await this.collection.deleteOne({ _id: new ObjectId(id) });

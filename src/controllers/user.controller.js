@@ -1,11 +1,9 @@
-import { UserRepository } from "../repositories/user.repository.js"
 import { UserService } from "../services/user.service.js"
 
 export class UserController {
 
     constructor() {
-        this.repo = new UserRepository()
-        this.service = new UserService(this.repo)
+        this.service = new UserService()
     }
 
     async getUsers(req, res) {

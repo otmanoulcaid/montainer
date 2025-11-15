@@ -1,6 +1,9 @@
+import { UserRepository } from "../repositories/user.repository.js";
+
 export class UserService {
-    constructor(userRepository) {
-        this.userRepository = userRepository;
+    constructor() {
+        this.userRepository = new UserRepository();
+        this.userRepository.loadUsers('src/data/user.data.json');
     }
 
     async getUser(obj) {

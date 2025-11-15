@@ -8,33 +8,35 @@ import authRoutes from './routes/auth.route.js';
 import { statWebsocket } from './routes/stats.route.js';
 import { DockerService } from './services/docker.service.js';
 import { ContainerRepository } from './repositories/container.repository.js';
+import { UserRepository } from './repositories/user.repository.js';
+// import { ContainerRepository } from './repositories/container.repository.mock.js';
+// import { UserRepository } from './repositories/user.repository.mock.js';
 
 export default class Server {
     constructor(port) {
         this.port = port || 3000;
         this.app = express();
-        this.config();
         this.routes();
     }
 
-    config() {
+    async config() {
         this.app.use(express.static('public')); // chemin des ressources statiques
         this.app.use(express.json());           // parser le corps des requêtes JSON
         this.app.use(cors());
-        const repo = new ContainerRepository()
-        this.app.locals['dockerService'] = new DockerService(repo) // activer CORS
+        this.app.locals['dockerService'] = new DockerService() // activer CORS
     }
 
     routes() {
-        this.app.use('/api/containers', containerRoutes);
-        // this.app.use('/api/users', userRoutes);
+        this.app.use('/api/V1/container', containerRoutes);
+        this.app.use('/api/v1/user', userRoutes);
         // this.app.use('/api/auth', authRoutes);
-        statWebsocket(this.app);
     }
 
     start(callback) {
         if (callback === undefined)
             callback = () => console.log(`Server is running on http://localhost:${this.port}`);
-        this.app.listen(this.port, callback);
+        const server = this.app.listen(this.port, callback);
+        server.dockerService = this.app.locals['dockerService']
+        statWebsocket(server)
     }
 }

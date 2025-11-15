@@ -1,0 +1,22 @@
+[
+  {
+    "name": "mongodb",
+    "image": "mongo",
+    "port": 27017
+  },
+  {
+    "name": "mysql",
+    "image": "mysql",
+    "port": 3306
+  },
+  {
+    "name": "redis",
+    "image": "redis",
+    "port": 6379
+  },
+  {
+    "name": "nginx",
+    "image": "nginx",
+    "port": 80
+  }
+]
