@@ -1,0 +1,69 @@
+.cf-wrapper {
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 24px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Arial;
+}
+
+.cf-title {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: #111827;
+    text-align: center;
+}
+
+.cf-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.cf-form label {
+    display: flex;
+    flex-direction: column;
+    font-size: 14px;
+    font-weight: 500;
+    color: #374151;
+}
+
+.cf-form input {
+    margin-top: 6px;
+    padding: 10px 12px;
+    font-size: 14px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.cf-form input:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+}
+
+.cf-btn {
+    margin-top: 12px;
+    padding: 12px;
+    font-size: 15px;
+    font-weight: 600;
+    background-color: #3b82f6;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+}
+
+.cf-btn:hover {
+    background-color: #2563eb;
+    transform: translateY(-1px);
+}
+
+.cf-btn:disabled {
+    background-color: #93c5fd;
+    cursor: not-allowed;
+}

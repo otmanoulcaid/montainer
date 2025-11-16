@@ -29,7 +29,7 @@ export class DockerService {
 
     async launchContainers() {
         try {
-            await this.repository.loadContainers('src/data/container.data.json');
+            await this.repository.loadContainers('src/data/xml/containers.xml.json');
             const containers = await this.repository.getContainers();
 
             for (let data of containers) {
@@ -65,23 +65,22 @@ export class DockerService {
         await container.start();
 
         // Insert into MongoDB
-        await this.repository.insertContainer({
-            dockerId: container.id,
-            name: obj.name || null,
-            image: obj.Image,
-            createdAt: new Date()
-        })
-
+        // await this.repository.insertContainer({
+        //     dockerId: container.id,
+        //     name: obj.name || null,
+        //     image: obj.Image,
+        //     createdAt: new Date()
+        // })
         return container
     }
 
     async deleteContainer({ id }) {
         const container = this.dockerd.container.get(id)
+        
 
         await container.delete({ force: true })
-
         // Remove from MongoDB
-        await this.repository.deleteContainer(id)
+        // await this.repository.deleteContainer(id)
         return { deleted: true }
     }
 

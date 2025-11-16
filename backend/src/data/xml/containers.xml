@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<containers xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:noNamespaceSchemaLocation="containers.xsd">
+
+  <!-- Container 1 -->
+  <container id="c1">
+    <name>webapp-front</name>
+    <image path="ubuntu">
+      <tag>latest</tag>
+    </image>
+    <hostPort>8080</hostPort>
+    <containerPort>80</containerPort>
+    <state type="stopped"/>
+    <status>Up 2 hours</status>
+    <ownerId>u10</ownerId>
+  </container>
+
+  <!-- Container 2 -->
+  <container id="c2">
+    <name>worker-1</name>
+    <image path="ubuntu">
+      <tag>1.0.0</tag>
+    </image>
+    <hostPort>9001</hostPort>
+    <containerPort>9000</containerPort>
+    <state type="running"/>
+    <status>Exited (0) 2025-11-15T10:00:00Z</status>
+    <ownerId>u11</ownerId>
+  </container>
+
+</containers>

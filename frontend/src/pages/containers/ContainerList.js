@@ -1,10 +1,13 @@
 import { useFetch } from "../../hooks/useFetch";
+import { useNavigate } from "react-router-dom";
 import './ContainerList.css';
 
 export default function ContainerList() {
-    const { data: containers, loading, error } = useFetch(
+    const navigate = useNavigate();
+    const { data: containers, loading } = useFetch(
         "http://localhost:3003/api/v1/container"
     );
+
     const getMeta = (status) => {
         switch (status) {
             case 'running':
@@ -18,42 +21,56 @@ export default function ContainerList() {
         }
     };
 
+    function clickHandler() {
+        navigate('/containers/new');
+    }
+
     return (
         <div className="cl-wrapper">
-            <h2 className="cl-title">Containers</h2>
 
+            {/* Header */}
+            <div className="cl-header">
+                <h2 className="cl-title">Containers</h2>
+                <button onClick={clickHandler} className="cl-create-btn">+ Créer un conteneur</button>
+            </div>
+
+            {/* List */}
             <ul className="cl-list">
-                {containers?.length === 0 && (
+                {loading && <li className="cl-empty">Chargement...</li>}
+
+                {!loading && containers?.length === 0 && (
                     <li className="cl-empty">Aucun container disponible</li>
                 )}
 
-                {containers?.map((c) => {
+                {!loading && containers?.map((c) => {
                     const meta = getMeta(c.state);
                     return (
                         <li key={c.id} className="cl-item">
                             <div className="cl-left">
-                                <div className={`cl-dot ${meta.cls}`} aria-hidden></div>
+                                <div className={`cl-dot ${meta.cls}`}></div>
+
                                 <div className="cl-meta">
                                     <div className="cl-name">{c.name}</div>
-                                    <div className="cl-id">ID: {String(c.id)}</div>
+                                    <div className="cl-id">ID: {c.id}</div>
                                 </div>
                             </div>
 
                             <div className="cl-right">
-                                <div className="cl-status">{meta.label}</div>
-                                <button className="cl-btn">Détails</button>
+                                <span className="cl-status">{meta.label}</span>
+                                
+                                {/* Bouton navigable */}
+                                <button
+                                    className="cl-btn"
+                                    onClick={() => navigate(`/containers/${c.id}`)}
+                                >
+                                    Détails
+                                </button>
                             </div>
                         </li>
                     );
                 })}
             </ul>
 
-            <div className="cl-legend">
-                <div className="cl-legend-item"><span className="cl-dot dot--green" /> Running</div>
-                <div className="cl-legend-item"><span className="cl-dot dot--gray" /> Stopped</div>
-                <div className="cl-legend-item"><span className="cl-dot dot--red" /> Exited</div>
-            </div>
         </div>
     );
 }
-

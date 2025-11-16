@@ -4,7 +4,7 @@ export class UserService {
     static #userService = null;
     constructor() {
         this.userRepository = UserRepository.getRepo();
-        this.userRepository.loadUsers('src/data/user.data.json');
+        this.userRepository.loadUsers('src/data/xml/users.xml.json');
     }
 
     static getService() {

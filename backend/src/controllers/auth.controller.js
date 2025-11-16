@@ -28,8 +28,6 @@ export class AuthController {
 
     me(req, res) {
         try {
-            console.log(req.cookies);
-            
             this.service.verifyTokenFromCookie(req);
             res.status(204).end()
         } catch (error) {

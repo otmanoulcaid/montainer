@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           elementFormDefault="qualified">
+
+    <xs:element name="containers">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="container" maxOccurs="unbounded">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="name" type="xs:string"/>
+
+                            <!-- image avec tag optionnel -->
+                            <xs:element name="image">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="tag" type="xs:string" minOccurs="0"/>
+                                    </xs:sequence>
+                                    <xs:attribute name="path" type="xs:string" use="required"/>
+                                </xs:complexType>
+                            </xs:element>
+
+                            <xs:element name="hostPort" type="xs:int"/>
+                            <xs:element name="containerPort" type="xs:int"/>
+
+                            <!-- state -->
+                            <xs:element name="state">
+                                <xs:complexType>
+                                    <xs:attribute name="type" use="required">
+                                        <xs:simpleType>
+                                            <xs:restriction base="xs:string">
+                                                <xs:enumeration value="stopped"/>
+                                                <xs:enumeration value="running"/>
+                                                <xs:enumeration value="exited"/>
+                                            </xs:restriction>
+                                        </xs:simpleType>
+                                    </xs:attribute>
+                                </xs:complexType>
+                            </xs:element>
+
+                            <xs:element name="status" type="xs:string"/>
+
+                            <!-- ownerId référence user.id -->
+                            <xs:element name="ownerId" type="xs:IDREF"/>
+                        </xs:sequence>
+
+                        <!-- attribut id -->
+                        <xs:attribute name="id" type="xs:ID" use="required"/>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+</xs:schema>

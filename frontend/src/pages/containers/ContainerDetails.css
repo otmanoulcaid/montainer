@@ -1,0 +1,124 @@
+.cd-wrapper {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: Inter, system-ui, sans-serif;
+    color: #111827;
+}
+
+.cd-back {
+    margin-bottom: 16px;
+    background: none;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    color: #2563eb;
+}
+
+.cd-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.cd-badge {
+    padding: 6px 12px;
+    border-radius: 12px;
+    color: #fff;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 12px;
+}
+
+.cd-running {
+    background: #16a34a;
+}
+
+.cd-stopped {
+    background: #6b7280;
+}
+
+.cd-exited {
+    background: #ef4444;
+}
+
+.cd-unknown {
+    background: #d1d5db;
+}
+
+.cd-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.cd-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 16px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.cd-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+}
+
+.cd-card h3 {
+    margin-bottom: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #374151;
+}
+
+.cd-card p {
+    font-size: 13px;
+    margin: 4px 0;
+    line-height: 1.4;
+}
+
+.cd-actions {
+    display: flex;
+    gap: 12px;
+}
+
+.cd-btn {
+    padding: 8px 14px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.15s;
+    color: #fff;
+}
+
+.cd-start {
+    background: #16a34a;
+}
+
+.cd-stop {
+    background: #f59e0b;
+}
+
+.cd-restart {
+    background: #2563eb;
+}
+
+.cd-delete {
+    background: #ef4444;
+}
+
+.cd-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.cd-loading {
+    text-align: center;
+    padding: 40px;
+    font-size: 18px;
+    color: #6b7280;
+}

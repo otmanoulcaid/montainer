@@ -36,7 +36,7 @@ export class ContainerRepository {
         const containers = JSON.parse(raw);
         await this.collection.deleteMany({});
         const result = await this.collection.insertMany(containers);
-        // await fs.unlink(tmpJsonPath);
+        await fs.unlink(tmpJsonPath);
 
         return {
             inserted: result.insertedCount,

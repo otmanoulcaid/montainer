@@ -15,7 +15,7 @@ export const statWebsocket = (server) => {
             } catch (e) {
                 ws.send(JSON.stringify({ error: e.message }))
             }
-        }, 2000)
+        }, 1000)
 
         ws.on('close', () => {
             clearInterval(interval)

@@ -9,6 +9,7 @@ import authRoutes from './routes/auth.route.js';
 import { statWebsocket } from './routes/stats.route.js';
 import { DockerService } from './services/docker.service.js';
 import { authMiddleware } from './middlewares/jwt.middleware.js';
+import { containerMapper, parseXmlWithXsd, userMapper } from './services/XML.js';
 // import { ContainerRepository } from './repositories/container.repository.mock.js';
 // import { UserRepository } from './repositories/user.repository.mock.js';
 
@@ -21,6 +22,8 @@ export default class Server {
     }
 
     config() {
+        parseXmlWithXsd('src/data/xml/containers.xml', 'src/data/xml/containers.xsd', containerMapper)
+        parseXmlWithXsd('src/data/xml/users.xml', 'src/data/xml/users.xsd', userMapper)
         this.app.use(express.static('public')); // chemin des ressources statiques
         this.app.use(express.json());           // parser le corps des requêtes JSON
         this.app.use(cors({

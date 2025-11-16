@@ -17,18 +17,18 @@ export function authMiddleware(req, res, next) {
 
     try {
         const token = req.cookies?.accessToken;
+
         if (!token)
             return res.status(401).json({ error: "Authentification requise" });
         const decoded = jwt.verify(token, process.env.JWT_SECRET || "dev8env");
 
         req.user = decoded;
         if (["POST", "DELETE"].includes(requestMethod)) {
+            
             if (req.user.role !== "devops")
                 return res.status(403).json({ error: "Accès réservé aux DevOps" });
         }
-
-        next();
-
+        return next();
     } catch (e) {
         return res.status(401).json({ error: "Token invalide ou expiré" });
     }

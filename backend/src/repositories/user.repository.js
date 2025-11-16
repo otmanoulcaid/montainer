@@ -40,7 +40,7 @@ export class UserRepository {
         }
         await this.collection.deleteMany({});
         const result = await this.collection.insertMany(users);
-        // await fs.unlink(tmpFilePath);
+        await fs.unlink(tmpFilePath);
 
         return {
             inserted: result.insertedCount,

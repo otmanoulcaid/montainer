@@ -1,21 +1,13 @@
-import React, { useState } from "react";
-import { useNavigate, Link, Outlet } from "react-router-dom";
+import React from "react";
+import { useNavigate, Link, Outlet, useLocation } from "react-router-dom";
 import "./MainLayout.css";
+import { FaHome, FaBoxes, FaChartBar, FaUserTie, FaUserCog, FaSignOutAlt } from "react-icons/fa";
 
 const MainLayout = ({ auth, setAuth }) => {
-    const [showContainers, setShowContainers] = useState(false);
-    const [showUsers, setShowUsers] = useState(false);
-    let navigate = useNavigate()
-    if (!auth)
-        navigate("/login")
+    const navigate = useNavigate();
+    const location = useLocation();
 
-    function containerClickHandler() {
-        setShowContainers(!showContainers);
-    }
-
-    function userClickHandler() {
-        setShowUsers(!showUsers);
-    }
+    if (!auth) navigate("/login");
 
     async function handleLogout() {
         try {
@@ -24,57 +16,43 @@ const MainLayout = ({ auth, setAuth }) => {
                 headers: { "Content-Type": "application/json" },
                 credentials: "include",
             });
-
-            if (!response.ok) {
-                const data = await response.json();
-                throw new Error(data.message || "Login failed");
-            }
+            if (!response.ok) throw new Error("Logout failed");
             setAuth(false);
             navigate("/login");
         } catch (err) {
+            console.error(err);
         }
     }
+
+    const menuItems = [
+        { label: "Home", path: "/", icon: <FaHome /> },
+        { label: "Containers", path: "/containers", icon: <FaBoxes /> },
+        { label: "Dashboard Ressources", path: "/dashboard", icon: <FaChartBar /> },
+        { label: "DevOps Engineers", path: "/users/devops", icon: <FaUserTie /> },
+        { label: "Technicien", path: "/users/tech", icon: <FaUserCog /> },
+        { label: "Logout", action: handleLogout, icon: <FaSignOutAlt /> },
+    ];
 
     return (
         <div className="layout">
             <aside className="sidebar">
-                <h2>Menu</h2>
+                <h2 className="sidebar-title">Dashboard</h2>
                 <nav>
                     <ul>
-                        <li className="home"><Link to="/">Home</Link></li>
-
-                        {/* Containers dropdown */}
-                        <li>
-                            <button
-                                className={`dropdown-btn ${showContainers ? "open" : ""}`}
-                                onClick={containerClickHandler}
+                        {menuItems.map((item) => (
+                            <li
+                                key={item.label}
+                                className={location.pathname === item.path ? "active" : ""}
+                                onClick={item.action ? item.action : undefined}
                             >
-                                Containers
-                            </button>
-                            {showContainers && (
-                                <ul className="dropdown">
-                                    <li><Link to="/containers">Containers</Link></li>
-                                    <li><Link to="/stats">Stats</Link></li>
-                                </ul>
-                            )}
-                        </li>
-
-                        {/* Users dropdown */}
-                        <li>
-                            <button
-                                className={`dropdown-btn ${showUsers ? "open" : ""}`}
-                                onClick={userClickHandler}
-                            >
-                                Users
-                            </button>
-                            {showUsers && (
-                                <ul className="dropdown">
-                                    <li><Link to="/users/devops">DevOps</Link></li>
-                                    <li><Link to="/users/technicien">Technicians</Link></li>
-                                </ul>
-                            )}
-                        </li>
-                        <li onClick={handleLogout}>logout</li>
+                                {item.icon}
+                                {item.path ? (
+                                    <Link to={item.path}>{item.label}</Link>
+                                ) : (
+                                    <span>{item.label}</span>
+                                )}
+                            </li>
+                        ))}
                     </ul>
                 </nav>
             </aside>

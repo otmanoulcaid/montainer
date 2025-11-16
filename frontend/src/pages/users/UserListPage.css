@@ -1,0 +1,53 @@
+/* Wrapper général */
+.user-list-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 16px;
+  font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  color: #111827;
+}
+
+.user-list-wrapper h2 {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.user-list-empty {
+  padding: 20px;
+  text-align: center;
+  color: #6b7280;
+  font-size: 14px;
+}
+
+.loading-text, .error-text {
+  text-align: center;
+  margin-top: 40px;
+  font-size: 18px;
+  color: #374151;
+}
+
+/* Grid responsive */
+.user-list-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 16px;
+}
+
+/* Chaque card clickable */
+.user-card-wrapper {
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.user-card-wrapper:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .user-list-wrapper {
+    padding: 8px;
+  }
+}

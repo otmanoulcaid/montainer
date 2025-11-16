@@ -55,6 +55,8 @@ export class ContainerController {
     }
 
     async getContainer(req, res) {
+        console.log('======== get container ========');
+        
         const docker = req.app.locals['dockerService']
         try {
             const { id } = req.params
