@@ -1,18 +1,23 @@
 import { useState, useEffect } from "react";
 
 export default function useAuth() {
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
+    let [isAuthenticated, setIsAuthenticated] = useState(false); // null = inconnu
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        // Example: check if user session exists via API
         fetch("http://localhost:3003/api/v1/auth/me", {
-            credentials: "include", // send cookie
+            credentials: "include",
         })
-            .then((res) => {
-                if (res.ok) setIsAuthenticated(true);
+            .then(res => {
+                setIsAuthenticated(res.ok)
             })
-            .catch(() => setIsAuthenticated(false));
+            .catch(() => {
+                setIsAuthenticated(false)
+            })
+            .finally(() => {
+                setLoading(false);
+            });
     }, []);
 
-    return { isAuthenticated };
+    return [isAuthenticated, setIsAuthenticated, loading];
 }

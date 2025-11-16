@@ -23,7 +23,6 @@ export default function Login({setAuth}) {
                 const data = await response.json();
                 throw new Error(data.message || "Login failed");
             }
-            console.log(await response.json());
             setAuth(true);
             navigate("/");
         } catch (err) {

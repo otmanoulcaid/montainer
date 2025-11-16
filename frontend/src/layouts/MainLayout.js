@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import { useNavigate, Link, Outlet } from "react-router-dom";
 import "./MainLayout.css";
 
-const MainLayout = ({ setAuth }) => {
-    // State to toggle dropdowns
-
+const MainLayout = ({ auth, setAuth }) => {
     const [showContainers, setShowContainers] = useState(false);
     const [showUsers, setShowUsers] = useState(false);
     let navigate = useNavigate()
+    if (!auth)
+        navigate("/login")
 
     function containerClickHandler() {
         setShowContainers(!showContainers);
@@ -29,9 +29,8 @@ const MainLayout = ({ setAuth }) => {
                 const data = await response.json();
                 throw new Error(data.message || "Login failed");
             }
-            console.log(await response.json());
             setAuth(false);
-            navigate("/");
+            navigate("/login");
         } catch (err) {
         }
     }

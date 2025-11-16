@@ -5,12 +5,18 @@ import { useState } from "react";
 import useAuth from "./hooks/useAuth";
 
 function App() {
-  let [auth, setAuth] = useState(useAuth())
+  const [isAuthenticated, setIsAuthenticated, loading] = useAuth();
+
   return (
-    <Router>
-      <AppRoutes auth={auth} setAuth={setAuth} />
-    </Router>
+    <>
+      {loading ? (
+        <h1>Loading...</h1>
+      ) : (
+        <Router>
+          <AppRoutes auth={isAuthenticated} setAuth={setIsAuthenticated} />
+        </Router>
+      )}
+    </>
   );
 }
-
 export default App;

@@ -1,0 +1,75 @@
+
+.cl-wrapper {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 16px;
+  font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  color: #111827;
+}
+
+.cl-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.cl-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-radius: 8px;
+  background: #ffffff;
+  box-shadow: 0 1px 2px rgba(16,24,40,0.04), 0 1px 3px rgba(16,24,40,0.06);
+  overflow: hidden;
+}
+
+.cl-empty {
+  padding: 20px;
+  text-align: center;
+  color: #6b7280;
+}
+
+.cl-item { display: flex; align-items: center; justify-content: space-between; height: 80px; padding: 20px; border-bottom: 1px solid #f3f4f6; transition: transform 0.15s ease, box-shadow 0.15s ease; }
+
+.cl-item:hover { transform: translateY(-2px); box-shadow: 0 4px 10px rgba(0,0,0,0.08); background: #fafafa; }
+
+.cl-item:last-child { border-bottom: none; }
+
+.cl-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.cl-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: inline-block;
+  box-shadow: 0 0 0 3px rgba(0,0,0,0.03);
+}
+
+.dot--green { background: #16a34a; box-shadow: 0 0 0 6px rgba(22,163,74,0.08); }
+.dot--red { background: #ef4444; box-shadow: 0 0 0 6px rgba(239,68,68,0.08); }
+.dot--gray { background: #9ca3af; box-shadow: 0 0 0 6px rgba(156,163,175,0.06); }
+.dot--gray-light { background: #d1d5db; box-shadow: 0 0 0 6px rgba(209,213,219,0.05); }
+
+.cl-meta { line-height: 1; }
+.cl-name { font-size: 14px; font-weight: 600; color: #0f172a; }
+.cl-id { font-size: 12px; color: #6b7280; }
+
+.cl-right { display: flex; align-items: center; gap: 12px; }
+.cl-status { font-size: 13px; color: #111827; }
+
+.cl-btn {
+  border: 1px solid #e5e7eb;
+  background: #fff;
+  padding: 6px 10px;
+  font-size: 13px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.cl-btn:hover { background: #f9fafb; }
+
+.cl-legend { margin-top: 12px; display: flex; gap: 12px; font-size: 13px; color: #374151; }
+.cl-legend-item { display: flex; align-items: center; gap: 8px; }

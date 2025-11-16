@@ -45,12 +45,8 @@ export class AuthService {
         return { message: "Logged out successfully" };
     }
 
-    verifyToken(token) {
-        return jwt.verify(token, process.env.JWT_SECRET || "dev8env");
-    }
-
     verifyTokenFromCookie(req) {
-        const token = req.cookies.jwt;
+        const token = req.cookies.accessToken;
         if (!token) throw new Error("No token provided");
         return jwt.verify(token, process.env.JWT_SECRET || "dev8env");
     }

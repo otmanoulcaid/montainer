@@ -11,8 +11,6 @@ export class AuthController {
         try {
             const { matricule, password } = req.body;
             const result = await this.service.login(matricule, password, res);
-            console.log(res.getHeaders());
-
             res.json(result);  // { message, user }
         } catch (e) {
             res.status(401).json({ error: e.message });
@@ -30,9 +28,12 @@ export class AuthController {
 
     me(req, res) {
         try {
+            console.log(req.cookies);
+            
             this.service.verifyTokenFromCookie(req);
+            res.status(204).end()
         } catch (error) {
-            res.status(401).json({ error: e.message });
+            res.status(401).json({ error: error.message });
         }
     }
 }
