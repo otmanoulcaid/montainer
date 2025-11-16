@@ -1,0 +1,72 @@
+/* Container for centering the form */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f4f6f8;
+    font-family: Arial, sans-serif;
+}
+
+/* The login form itself */
+.login-form {
+    background-color: #2496ed;
+    /* Docker blue theme */
+    padding: 40px;
+    border-radius: 12px;
+    color: white;
+    width: 350px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease-in-out;
+}
+
+.login-form:hover {
+    transform: translateY(-5px);
+}
+
+.login-form h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.login-form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.login-form input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.login-form input:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px #0db7ed;
+}
+
+.login-form button {
+    width: 100%;
+    padding: 12px;
+    background-color: #0db7ed;
+    /* lighter Docker blue */
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.login-form button:hover {
+    background-color: #007bbf;
+}
+
+.error {
+    color: #ffcccb;
+    margin-bottom: 10px;
+    text-align: center;
+}

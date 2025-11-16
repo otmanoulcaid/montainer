@@ -8,8 +8,6 @@ import userRoutes from './routes/user.route.js';
 import authRoutes from './routes/auth.route.js';
 import { statWebsocket } from './routes/stats.route.js';
 import { DockerService } from './services/docker.service.js';
-import { ContainerRepository } from './repositories/container.repository.js';
-import { UserRepository } from './repositories/user.repository.js';
 import { authMiddleware } from './middlewares/jwt.middleware.js';
 // import { ContainerRepository } from './repositories/container.repository.mock.js';
 // import { UserRepository } from './repositories/user.repository.mock.js';
@@ -25,11 +23,15 @@ export default class Server {
     config() {
         this.app.use(express.static('public')); // chemin des ressources statiques
         this.app.use(express.json());           // parser le corps des requêtes JSON
-        this.app.use(cors());
+        this.app.use(cors({
+            origin: 'http://localhost:3000',  // <-- your frontend URL
+            credentials: true,
+            methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+        }));
         this.app.use(cookieParser());
         this.app.locals['dockerService'] = new DockerService();
     }
-    
+
     routes() {
         this.app.use('/api', authMiddleware);
         this.app.use('/api/V1/container', containerRoutes);

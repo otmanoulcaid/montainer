@@ -1,10 +1,15 @@
-import './App.css';
+import { BrowserRouter as Router } from "react-router-dom";
+import AppRoutes from "./routes/AppRoutes";
+import "./App.css"; // optional global styles
+import { useState } from "react";
+import useAuth from "./hooks/useAuth";
 
 function App() {
+  let [auth, setAuth] = useState(useAuth())
   return (
-    <div className="App">
-      
-    </div>
+    <Router>
+      <AppRoutes auth={auth} setAuth={setAuth} />
+    </Router>
   );
 }
 

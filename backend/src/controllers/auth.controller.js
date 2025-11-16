@@ -11,6 +11,7 @@ export class AuthController {
         try {
             const { matricule, password } = req.body;
             const result = await this.service.login(matricule, password, res);
+            console.log(res.getHeaders());
 
             res.json(result);  // { message, user }
         } catch (e) {
@@ -24,6 +25,14 @@ export class AuthController {
             res.json(result); // { message: "Déconnexion réussie" }
         } catch (e) {
             res.status(500).json({ error: e.message });
+        }
+    }
+
+    me(req, res) {
+        try {
+            this.service.verifyTokenFromCookie(req);
+        } catch (error) {
+            res.status(401).json({ error: e.message });
         }
     }
 }
