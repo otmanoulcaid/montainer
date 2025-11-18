@@ -1,0 +1,31 @@
+services:
+  database:
+    image: mongo:7
+    container_name: mongodb
+    env_file:
+      - database/.env
+    volumes:
+      - mongo_data:/data/db
+
+  backend:
+    build: ./backend
+    container_name: backend
+    env_file:
+      - backend/.env
+    ports:
+      - "3003:3003"
+    depends_on:
+      - database
+
+  frontend:
+    build: ./frontend
+    container_name: frontend
+    env_file:
+      - frontend/.env
+    depends_on:
+      - backend
+    ports:
+      - "80:80"
+
+volumes:
+  mongo_data:

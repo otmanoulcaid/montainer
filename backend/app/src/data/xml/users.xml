@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<users
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="users.xsd">
+
+  <user id="u10">
+    <name>Aymane</name>
+    <password>test</password>
+    <role typeRole="devops"/> <!--devops | tech-->
+    <job typeJob="chef_projet"/> <!--technicien | ingenieur | chef_projet | manager -->
+  </user>
+
+  <user id="u11">
+    <name>Otman</name>
+    <password>test</password>
+    <role typeRole="tech"/>
+    <job typeJob="ingenieur"/>
+  </user>
+
+  <user id="u12">
+    <name>Houssam</name>
+    <password>test</password>
+    <role typeRole="devops"/>
+    <job typeJob="manager"/>
+  </user>
+
+  <user id="u13">
+    <name>Khalid</name>
+    <password>test</password>
+    <role typeRole="tech"/>
+    <job typeJob="manager"/>
+  </user>
+
+</users>
