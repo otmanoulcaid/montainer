@@ -14,12 +14,14 @@ export default function UserListPage() {
     const fetchUsers = async () => {
       try {
         const res = await fetch(`
-          http://192.168.100.38:3003/api/v1/user`, {
+          http://172.19.80.1:3003/api/v1/user`, {
           credentials: "include",
         });
         if (!res.ok) throw new Error("Erreur lors du fetch des users");
         const data = await res.json();
         setUsers(data);
+        console.log(data);
+        
       } catch (err) {
         console.error(err);
         setError(err.message);
@@ -42,7 +44,7 @@ export default function UserListPage() {
 
   return (
     <div className="user-list-wrapper">
-      <h2>Liste des {role ? role.charAt(0).toUpperCase() + role.slice(1) : "utilisateurs"}</h2>
+      <h2>Liste des {role == 'eng' ? 'Ingenieurs' : "Techniciens"}</h2>
 
       {filteredUsers.length === 0 && (
         <p className="user-list-empty">Aucun utilisateur trouvé</p>

@@ -22,7 +22,7 @@ export default function CreateContainer() {
 
         try {
             const result = await fetch(`
-                http://192.168.100.38:3003/api/v1/container`, {
+                http://172.19.80.1:3003/api/v1/container`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json', // <-- IMPORTANT

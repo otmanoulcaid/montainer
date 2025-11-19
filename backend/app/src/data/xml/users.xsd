@@ -16,7 +16,7 @@
                                     <xs:attribute name="typeRole" use="required">
                                         <xs:simpleType>
                                             <xs:restriction base="xs:string">
-                                                <xs:enumeration value="devops"/>
+                                                <xs:enumeration value="eng"/>
                                                 <xs:enumeration value="tech"/>
                                             </xs:restriction>
                                         </xs:simpleType>

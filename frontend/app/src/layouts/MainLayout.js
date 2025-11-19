@@ -12,7 +12,7 @@ const MainLayout = ({ auth, setAuth }) => {
     async function handleLogout() {
         try {
             const response = await fetch(
-                `http://192.168.100.38:3003/api/v1/auth/logout`, {
+                `http://172.19.80.1:3003/api/v1/auth/logout`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 credentials: "include",
@@ -29,7 +29,7 @@ const MainLayout = ({ auth, setAuth }) => {
         { label: "Home", path: "/", icon: <FaHome /> },
         { label: "Containers", path: "/containers", icon: <FaBoxes /> },
         { label: "Dashboard Ressources", path: "/dashboard", icon: <FaChartBar /> },
-        { label: "DevOps Engineers", path: "/users/devops", icon: <FaUserTie /> },
+        { label: "Engineers", path: "/users/eng", icon: <FaUserTie /> },
         { label: "Technicien", path: "/users/tech", icon: <FaUserCog /> },
         { label: "Logout", action: handleLogout, icon: <FaSignOutAlt /> },
     ];

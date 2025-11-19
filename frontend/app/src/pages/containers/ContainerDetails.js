@@ -12,7 +12,7 @@ export default function ContainerDetails() {
     const fetchDetails = async () => {
         try {
             const res = await fetch(
-                `http://192.168.100.38:3003/api/v1/container/${id}`, {
+                `http://172.19.80.1:3003/api/v1/container/${id}`, {
                 credentials: "include"
             });
             if (!res.ok) throw new Error("Container introuvable");
@@ -28,7 +28,7 @@ export default function ContainerDetails() {
     const action = async (type, method) => {
         setBusy(true);
         try {
-            const response = await fetch(`http://192.168.100.38:3003/api/v1/container/${id}/${type}`, {
+            const response = await fetch(`http://172.19.80.1:3003/api/v1/container/${id}/${type}`, {
                 method,
                 credentials: "include"
             });

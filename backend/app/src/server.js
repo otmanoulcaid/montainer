@@ -27,7 +27,7 @@ export default class Server {
         this.app.use(express.static('public')); // chemin des ressources statiques
         this.app.use(express.json());           // parser le corps des requêtes JSON
         this.app.use(cors({
-            origin: 'http://192.168.100.38',  // <-- your frontend URL
+            origin: 'http://172.19.80.1',  // <-- your frontend URL
             credentials: true,
             methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
         }));

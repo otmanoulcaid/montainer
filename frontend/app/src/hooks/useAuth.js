@@ -5,7 +5,7 @@ export default function useAuth() {
     const [loading, setLoading] = useState(true);
     useEffect(() => {
         fetch(`
-            http://192.168.100.38:3003/api/v1/auth/me`, {
+            http://172.19.80.1:3003/api/v1/auth/me`, {
             credentials: "include",
         })
             .then(res => {

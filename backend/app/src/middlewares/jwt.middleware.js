@@ -25,7 +25,7 @@ export function authMiddleware(req, res, next) {
         req.user = decoded;
         if (["POST", "DELETE"].includes(requestMethod)) {
             
-            if (req.user.role !== "devops")
+            if (req.user.role !== "ing")
                 return res.status(403).json({ error: "Accès réservé aux DevOps" });
         }
         return next();

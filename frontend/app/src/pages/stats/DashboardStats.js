@@ -6,7 +6,7 @@ export default function DashboardStats() {
     const [connected, setConnected] = useState(false);
 
     useEffect(() => {
-        const ws = new WebSocket("ws://192.168.100.38:3003/ws/v1/container/stats");
+        const ws = new WebSocket("ws://172.19.80.1:3003/ws/v1/container/stats");
 
         ws.onopen = () => setConnected(true);
         ws.onclose = () => setConnected(false);
