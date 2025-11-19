@@ -16,7 +16,7 @@ export default function UserCard({ user }) {
                 <div className={`user-dot ${getRoleDotClass(user.role)}`} aria-hidden />
                 <img className="user-avatar" src={"/devops1.webp"} alt={user.fullName} />
                 <div className="user-meta">
-                    <div className="user-name">{user.fullName}</div>
+                    <div className="user-name">{user.name}</div>
                     <div className="user-role">{user.metier}</div>
                     <div className="user-exp">{user.experience} ans d'expérience</div>
                 </div>

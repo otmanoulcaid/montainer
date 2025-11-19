@@ -14,7 +14,7 @@
     <name>Otman</name>
     <password>test</password>
     <role typeRole="tech"/>
-    <job typeJob="support technique"/>
+    <job typeJob="technicien support"/>
   </user>
 
   <user id="u12">
@@ -24,11 +24,18 @@
     <job typeJob="manager"/>
   </user>
 
+  <user id="u14">
+    <name>Salma</name>
+    <password>test</password>
+    <role typeRole="eng"/>
+    <job typeJob="ingenieur"/>
+  </user>
+
   <user id="u13">
     <name>Khalid</name>
     <password>test</password>
     <role typeRole="tech"/>
-    <job typeJob="monitoring"/>
+    <job typeJob="technicien monitoring"/>
   </user>
 
 </users>

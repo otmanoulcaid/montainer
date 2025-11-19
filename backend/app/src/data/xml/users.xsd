@@ -29,7 +29,8 @@
                                     <xs:attribute name="typeJob" use="required">
                                         <xs:simpleType>
                                             <xs:restriction base="xs:string">
-                                                <xs:enumeration value="technicien"/>
+                                                <xs:enumeration value="technicien support"/>
+                                                <xs:enumeration value="technicien monitoring"/>
                                                 <xs:enumeration value="ingenieur"/>
                                                 <xs:enumeration value="chef_projet"/>
                                                 <xs:enumeration value="manager"/>
